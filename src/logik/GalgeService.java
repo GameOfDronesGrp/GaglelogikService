@@ -4,6 +4,9 @@ import database.DALException;
 import database.ScoreDAO;
 import database.ScoreDTO;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +24,18 @@ import javax.jws.WebService;
     portName="GalgePort",
     targetNamespace="http://galgelegport/wsdl"
 )
-public class GalgeService implements GalgeServiceI {
+public class GalgeService extends UnicastRemoteObject implements GalgeServiceI {
     HashMap<String, Galgelogik> gameContainer = new HashMap<>();
     public final String NAME = "/GalgeService?wsdl";
+    
+        
+    public GalgeService() throws java.rmi.RemoteException{}
+    
+    
+    
+    public String sayHello(){
+        return "Hello world!";
+    }    
     
     @Override
     public ArrayList<String> getBrugteBogstaver(String user, String pass) {
