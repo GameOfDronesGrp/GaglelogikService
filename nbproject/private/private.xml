@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Group 20170504-04:49:48">
             <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/bruger/Bruger.java</file>
-            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/server/Server.java</file>
+            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/database/ScoreDTO.java</file>
+            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/database/Connector.java</file>
+            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/logik/GalgeService.java</file>
             <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/database/ScoreDAO.java</file>
+            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/bruger/BrugeradminImp.java</file>
             <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/database/ScoreDAOI.java</file>
-            <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/logik/Galgelogik.java</file>
         </group>
     </open-files>
 </project-private>
