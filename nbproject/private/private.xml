@@ -11,5 +11,12 @@
             <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/bruger/BrugeradminImp.java</file>
             <file>file:/home/mohammad/NetBeansProjects/GalgelogikService/src/database/ScoreDAOI.java</file>
         </group>
+        <group name="CDIO">
+            <file>file:/Users/mohammad/NetBeansProjects/GaglelogikService/xml-resources/web-service-references/brugeradmin/wsdl/javabog.dk_9901/brugeradmin.wsdl</file>
+            <file>file:/Users/mohammad/NetBeansProjects/GaglelogikService/src/server/Server.java</file>
+            <file>file:/Users/mohammad/NetBeansProjects/GaglelogikService/src/bruger/Bruger.java</file>
+            <file>file:/Users/mohammad/NetBeansProjects/GaglelogikService/src/bruger/BrugeradminImp.java</file>
+            <file>file:/Users/mohammad/NetBeansProjects/GaglelogikService/src/logik/GalgeServiceI.java</file>
+        </group>
     </open-files>
 </project-private>

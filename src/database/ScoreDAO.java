@@ -35,6 +35,7 @@ public class ScoreDAO implements ScoreDAOI{
                 Logger.getLogger(ScoreDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch(ClassNotFoundException e){
                 System.err.print(e);
+                e.printStackTrace();
             }
            return null;
         }
@@ -81,8 +82,10 @@ public class ScoreDAO implements ScoreDAOI{
                 "INSERT INTO Highscore(user_id, score) VALUES " +
                 "('" + hs.getUserID()+ "', " + hs.getScore() + ");");
             } catch (SQLException exception) {
+                exception.printStackTrace();
                 Logger.getLogger(ScoreDAO.class.getName()).log(Level.SEVERE, null, exception);
             } catch ( ClassNotFoundException e){
+                e.printStackTrace();
                 
             }
 	}
@@ -113,9 +116,11 @@ public class ScoreDAO implements ScoreDAOI{
                     list.add(new ScoreDTO(rs.getInt("rank"), rs.getString("user_id"), rs.getInt("score"), rs.getString("time")));
                 }
             }catch (SQLException e){
+                e.printStackTrace();
                 throw new DALException(e);
             } catch(ClassNotFoundException e){
                 System.err.print(e);
+                e.printStackTrace();
             }
             return list;
         }

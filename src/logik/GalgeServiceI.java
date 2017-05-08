@@ -7,10 +7,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebMethod;
-/**
- *
- * @author mohammad
- */
+
 public interface GalgeServiceI extends Remote{
     public String sayHello() throws RemoteException;
     @WebMethod public ArrayList<String> getBrugteBogstaver(String user, String pass) throws RemoteException;
