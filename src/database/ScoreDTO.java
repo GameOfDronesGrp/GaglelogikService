@@ -45,7 +45,7 @@ public class ScoreDTO implements Serializable {
 
     public int getRank(String userID){
         if(rank > 0){
-            return 1;
+            return rank;
         }else{
             return -1;
         }
@@ -57,11 +57,28 @@ public class ScoreDTO implements Serializable {
         else this.score = 0;
     }
     
-    public String getUserID() { return userID; }
-    public int getScore() { return score; }
-    public void setUserID(int id) { this.userID = userID; }
-    public String getDatetime() { return time; }
-    public void setDatetime(String datetime) { this.time = datetime; }
-    public String toString() { return userID + "\t" + score + "\t" + time; }
+    public String getUserID() {
+        return userID; 
+    }
+    
+    public int getScore() { 
+        return score; 
+    }
+    
+    public void setUserID(String userID) { 
+        this.userID = userID; 
+    }
+    
+    public String getDatetime() { 
+        return time; 
+    }
+    
+    public void setDatetime(String datetime) { 
+        this.time = datetime; 
+    }
+    
+    public String toString() { 
+        return userID + "\t" + score + "\t" + time; 
+    }
 }
 

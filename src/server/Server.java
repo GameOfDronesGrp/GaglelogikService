@@ -30,18 +30,21 @@ public class Server{
         GalgeServiceI gs = new GalgeService();
         try {
             int port = 9591;
-            String url = "http://ubuntu4.javabog.dk:"+port+"/Gruppe11";
+            //String url = "http://ubuntu4.javabog.dk:"+port+"/Gruppe11";
+            String url = "http://ec2-52-59-108-247.eu-central-1.compute.amazonaws.com:"+port+"/Gruppe11";
             endpoint.publish(url,gs);
             System.out.println("GalgelogikService publiceret. \nWDSL link: ");
             System.out.println(url+gs.toString());
             
             java.rmi.registry.LocateRegistry.createRegistry(9592);
-            String rmiLink = "rmi://ubuntu4.javabog.dk:9592/Galgelogiktjeneste";
+            //String rmiLink = "rmi://ubuntu4.javabog.dk:9592/Galgelogiktjeneste";
+            //java.rmi.registry.LocateRegistry.createRegistry(1099);
+            String rmiLink = "rmi://ec2-52-59-108-247.eu-central-1.compute.amazonaws.com:9592/Galgelogiktjeneste";
             Naming.rebind(rmiLink, gs);
             System.out.println("\nRMI KØRER! \nLink: ");
             System.out.println(rmiLink);
         } catch (Exception ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         
     }

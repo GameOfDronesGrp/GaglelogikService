@@ -1,5 +1,7 @@
 package logik;
 
+import bruger.BrugeradminImp;
+import brugerautorisation.transport.soap.Bruger;
 import database.DALException;
 import database.ScoreDAO;
 import database.ScoreDTO;
@@ -14,10 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebService;
 
-/**
- *
- * @author mohammad
- */
 
 @WebService(
     name="Galgelogik",
@@ -30,12 +28,12 @@ public class GalgeService extends UnicastRemoteObject implements GalgeServiceI {
     
         
     public GalgeService() throws java.rmi.RemoteException{}
-    
-    
+   
     
     public String sayHello(){
         return "Hello world!";
-    }    
+    }  
+    
     
     @Override
     public ArrayList<String> getBrugteBogstaver(String user, String pass) {
@@ -113,16 +111,34 @@ public class GalgeService extends UnicastRemoteObject implements GalgeServiceI {
 
     @Override
     public boolean hentBruger(String brugernavn, String password) throws RemoteException{
-        if(gameContainer.get(brugernavn) == null){
-            try {
-                gameContainer.put(brugernavn, new Galgelogik());
-            } catch (DALException ex) {
-                System.out.println("Forbindelse med database mislykkedes...");
+        
+        try {
+            Galgelogik gl = new Galgelogik();
+            if(gl.hentBruger(brugernavn, password)){
+                if(gameContainer.get(brugernavn) == null){
+                    gameContainer.put(brugernavn, gl);
+                }
+                return true;
             }
+                
+                
+            return false;
+            /*
+            if(gameContainer.get(brugernavn) == null){
+            try {
+            gameContainer.put(brugernavn, new Galgelogik());
+            } catch (DALException e) {
+            System.out.println("Forbindelse med database mislykkedes...");
+            e.printStackTrace();
+            }
+            }
+            Galgelogik gl = gameContainer.get(brugernavn);
+            boolean bool = gl.hentBruger(brugernavn, password);
+            return bool;*/
+        } catch (DALException ex) {
+            ex.printStackTrace();
         }
-        Galgelogik gl = gameContainer.get(brugernavn);
-        boolean bool = gl.hentBruger(brugernavn, password);
-        return bool;
+        return false;
     }
 
     @Override
@@ -133,7 +149,7 @@ public class GalgeService extends UnicastRemoteObject implements GalgeServiceI {
     }
     
     @Override
-    public List<ScoreDTO> getRankList(String user, String pass) {
+    public List<ScoreDTO> getRankList() {
         try {
             return new ScoreDAO().getHighscoreList();
         } catch (DALException ex) {

@@ -32,7 +32,7 @@ public class Galgelogik {
     private boolean sidsteBogstavVarKorrekt;
     private boolean spilletErVundet;
     private boolean spilletErTabt;
-    private Bruger bruger;
+    private Bruger spillere;
     private int score;
     private ScoreDAO scoreDAO;
     
@@ -50,14 +50,14 @@ public class Galgelogik {
     }
     
     public int getScore(){
-        return score;
+        return spillere.getScoreDTO().getScore();
     }
     
-    private void saveScore(int score){
+    private void saveScore(ScoreDTO sdto){
         try {
-            scoreDAO.updateHighscore(bruger.getScoreDTO());
+            scoreDAO.updateHighscore(sdto);
         } catch (DALException ex) {
-            Logger.getLogger(Galgelogik.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     
@@ -92,15 +92,17 @@ public class Galgelogik {
     public boolean erSpilletSlut() {
         if(erSpilletVundet()){
             score += (30 + ((getBrugteBogstaver().size() - getAntalForkerteBogstaver())*8));
-            saveScore(score);
+            spillere.getScoreDTO().setScore(score);
+            saveScore(spillere.getScoreDTO());
         } else if (erSpilletTabt()) {
             score += (((getBrugteBogstaver().size() - getAntalForkerteBogstaver())*3-30));
-            bruger.getScoreDTO().setScore(score);
-            saveScore(score);
+            if(score < 0) score = 0;
+            spillere.getScoreDTO().setScore(score);
+            saveScore(spillere.getScoreDTO());
         }
     return spilletErTabt || spilletErVundet;
     }
-
+    
     public void nulstil() {
         brugteBogstaver.clear();
         antalForkerteBogstaver = 0;
@@ -153,29 +155,30 @@ public class Galgelogik {
             return true;
         try{
             BrugeradminImp ba = new BrugeradminImp();
-            bruger = ba.getBruger(brugernavn, password, scoreDAO.getHighscore(brugernavn));
-            System.out.println(bruger.fornavn +" er logget ind");
-            hentOrdFraDr();
-            score = bruger.getScoreDTO().getScore();
-            if(score < 0 ) score = 0;
-            return true;
+            if(ba.hentBruger(brugernavn, password) != null){
+                spillere = ba.getBruger(brugernavn, password, scoreDAO.getHighscore(brugernavn));
+                System.out.println(getFornavn() +" er logget ind");
+                hentOrdFraDr();
+                score = spillere.getScoreDTO().getScore();
+                return true;
+            }else 
+                return false;
         } catch(Exception e){
             System.out.println("Indhentning af bruger oplysninger var ikke muligt");
             e.printStackTrace();
+            return false;
         }
-        
-	return false;        
     }
     
     public String getFornavn() {
-        if(bruger == null)
+        if(spillere == null)
             return "ingen bruger er logget ind";
-        return bruger.fornavn;
+        return spillere.fornavn;
     }
     
     public void logStatus() {
       System.out.println("---------- ");
-      System.out.println("- ordet (skult) = " + ordet);
+      System.out.println("- ordet (skjult) = " + ordet);
       System.out.println("- synligtOrd = " + synligtOrd);
       System.out.println("- forkerteBogstaver = " + antalForkerteBogstaver);
       System.out.println("- brugeBogstaver = " + brugteBogstaver);

@@ -23,6 +23,6 @@ public interface GalgeServiceI extends Remote{
     @WebMethod public void gætBogstav(String user, String pass, String bogstav) throws RemoteException;
     @WebMethod public boolean hentBruger(String brugernavn, String password) throws RemoteException;
     @WebMethod public String getFornavn(String user, String pass) throws RemoteException;
-    @WebMethod public List<ScoreDTO> getRankList(String user, String pass) throws RemoteException;
+    @WebMethod public List<ScoreDTO> getRankList() throws RemoteException;
     @WebMethod public int getScore(String user, String pass) throws RemoteException;
 }

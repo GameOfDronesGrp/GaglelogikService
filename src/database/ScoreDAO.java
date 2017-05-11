@@ -28,7 +28,7 @@ public class ScoreDAO implements ScoreDAOI{
                 else {
                     System.out.println("Ingen værdier fundet. Opretter nyt");
                     createHighscore(userID);
-                    getScore(userID);
+                    getHighscore(userID);
                 }
             } catch (SQLException ex) {
                 System.out.println("Kunne ikke hente highscore");
